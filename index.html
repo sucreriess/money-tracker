@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracker pro max</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Track Your Money</h1>
+    </header>
+    <div class="inputs">
+    <div class="container income">
+        <div>
+            <div class="income__head">
+                <h4>Income sources</h4>
+                <h4>Amount</h4>
+            </div>
+            <div>
+                <form action="/submit">
+                    <input type="text" name="income" id="income">
+                    <input type="text" name="amount" id="amount">
+                    <button type="submit"> Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container expenditure">
+        <div>
+            <div class="expenditure__head">
+                <h4>Spent money on:</h4>
+                <h4>Amount</h4>
+            </div>
+            <div>
+                <form action="/submit">
+                    <input type="text" name="expenditure" id="expenditure">
+                    <input type="text" name="amount" id="amount">
+                    <button type="submit"> Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
