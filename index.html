@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Money Tracker pro max</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Tracking App</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <header>
-        <h1>Track Your Money</h1>
-    </header>
-    <div class="inputs">
-    <div class="container income">
-        <div>
-            <div class="income__head">
-                <h4>Income sources</h4>
-                <h4>Amount</h4>
-            </div>
-            <div>
-                <form action="/submit">
-                    <input type="text" name="income" id="income">
-                    <input type="text" name="amount" id="amount">
-                    <button type="submit"> Submit</button>
-                </form>
-            </div>
-        </div>
+    <header><h2>Money Management App</h2></header>
+  <div class="app">
+    <div class ="input-form">
+      <h2>Note Your Transactions</h2>
+
+      <form id="expenseForm" action="/addExpense" method="post">
+        <label for="transactionName">Transaction Name:</label>
+        <input type="text" id="transactionName" name="transactionName" required>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+        <button type="submit">Add Transaction</button>
+      </form>
     </div>
 
-    <div class="container expenditure">
-        <div>
-            <div class="expenditure__head">
-                <h4>Spent money on:</h4>
-                <h4>Amount</h4>
-            </div>
-            <div>
-                <form action="/submit">
-                    <input type="text" name="expenditure" id="expenditure">
-                    <input type="text" name="amount" id="amount">
-                    <button type="submit"> Submit</button>
-                </form>
-            </div>
-        </div>
+    <div class ="transaction-table">
+      <h2>Transaction History</h2>
+      <table id="expenseTable">
+          <tr>
+            <th>Transaction Name</th>
+            <th>Amount</th>
+          </tr>
+      </table>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+          const response = await fetch('/getExpenses');
+          const expenses = await response.json();
+          updateExpenseTable(expenses);
+        });
+    
+        // update the expense table
+        function updateExpenseTable(expenses) {
+          const table = document.getElementById('expenseTable');
+          while (table.rows.length > 1) {
+            table.deleteRow(1);
+          }
+          expenses.forEach(expense => {
+            const newRow = table.insertRow(-1);
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            cell1.textContent = expense.transactionName;
+            cell2.textContent = expense.amount;
+          });
+        }
+      </script>
     </div>
-    </div>
+</div>
 </body>
 </html>
